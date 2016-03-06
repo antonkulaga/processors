@@ -63,7 +63,7 @@ object DependencyUtils {
    * @param chooseWhich a function deciding which of multiple heads is returned; the rightmost head selected by default
    * @return the single node which is closest to the root among those in span
    */
-  def findHead(span: Interval, graph: DependencyGraph, chooseWhich: Policy = defaultPolicy): Int = {
+  def findHead(span: Seq[Int], graph: DependencyGraph, chooseWhich: Policy = defaultPolicy): Int = {
     chooseWhich(findHeads(span, graph))
   }
 
@@ -75,7 +75,7 @@ object DependencyUtils {
    * @param graph a directed graph containing the nodes in span
    * @return the single node which is closest to the root among those in span
    */
-  def findHeads(span: Interval, graph: DependencyGraph): Seq[Int] = {
+  def findHeads(span: Seq[Int], graph: DependencyGraph): Seq[Int] = {
     @annotation.tailrec
     def countSteps(toksWithDist: List[(Int, Double)], seen: Set[Int]): Double = toksWithDist match {
       case Nil =>
@@ -128,7 +128,7 @@ object DependencyUtils {
    * @param chooseWhich the function to adjudicate which is highest when there's a tie
    * @return Option containing the highest node index, or None if no such node is found
    */
-  def findHeadStrict(span: Interval, sent: Sentence, chooseWhich: Policy = defaultPolicy): Option[Int] = {
+  def findHeadStrict(span: Seq[Int], sent: Sentence, chooseWhich: Policy = defaultPolicy): Option[Int] = {
     val hds = findHeadsStrict(span, sent)
     hds match {
       case Nil => None
@@ -143,7 +143,7 @@ object DependencyUtils {
    * @param sent the Sentence within which to look
    * @return Option containing a sequence of highest node indices, or None if no such node is found
    */
-  def findHeadsStrict(span: Interval, sent: Sentence): Seq[Int] = sent.dependencies match {
+  def findHeadsStrict(span: Seq[Int], sent: Sentence): Seq[Int] = sent.dependencies match {
     case None => Nil
     case Some(graph) =>
       val stopTags = "(.|,|\\(|\\)|:|''|``|#|$|CC|TO|IN)"
