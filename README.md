@@ -10,7 +10,7 @@ This is the main public code repository of the Computational Language Understand
 + A suite of NL processors in the `org.clulab.processors` package. We currently provide three APIs: one for [Stanford's CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml), one for a faster processor (`FastNLPProcessor`)
 that cherry picks fast components from multiple sources (Stanford and [MaltParser](http://www.maltparser.org/)), and, lastly, one for biomedical texts (`BioNLPProcessor`), which integrates resources trained for this domain (Stanford parser and our own NER based on the Stanford CRF).
 
-This software requires Java 1.8, Scala 2.11, and CoreNLP 3.x or higher.
+This software requires Java 1.8, Scala 2.11 or 2.12, and CoreNLP 3.x or higher.
 
 Our code is licensed as follows:
 + **`main, models`** - Apache License Version 2.0. Please note that these subprojects do not interact with the `corenlp` subproject below.

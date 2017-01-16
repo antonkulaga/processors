@@ -7,6 +7,7 @@ import org.clulab.struct.Counter
 import scala.collection.mutable
 import org.slf4j.LoggerFactory
 import scala.collection.parallel.ForkJoinTaskSupport
+import java.util.concurrent.ForkJoinPool
 
 /**
  * Operations on datasets
@@ -171,7 +172,7 @@ object Datasets {
       var bestGroup:String = null
       var bestFeatures:Set[Int] = null
 
-      val workingGroups = featureGroups.keySet.filter(! chosenGroups.contains(_)).toSet.par
+      val workingGroups = featureGroups.keySet.filter(!chosenGroups.contains(_)).par
       workingGroups.tasksupport = new ForkJoinTaskSupport(new scala.concurrent.forkjoin.ForkJoinPool(nCores))
 
       // this is parallelized!

@@ -3,6 +3,7 @@ import ReleaseTransformations._
 lazy val commonSettings = Seq(
   organization := "org.clulab",
   scalaVersion := "2.11.8",
+  crossScalaVersions := Seq("2.11.8", "2.12.1"),
   scalacOptions ++= Seq("-feature", "-unchecked", "-deprecation"),
   parallelExecution in Test := false,
   scalacOptions in (Compile, doc) += "-no-link-warnings", // suppresses problems with scaladoc @throws links
